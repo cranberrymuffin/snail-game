@@ -29,7 +29,7 @@ const Snail = () => {
     });
 
     // Movement speed and turning step
-    const moveAmount = 0.1;
+    const moveAmount = 0.5;
 
     // Effect to handle key press events for movement and turning
     useEffect(() => {
@@ -123,7 +123,7 @@ const Snail = () => {
         }, [position]); // Depend on position to trigger re-render when position changes
     */
     return (
-        <group position={position} ref={snailRef} rotation={rotation}>
+        <group position={position} ref={snailRef} rotation={rotation} scale={0.5}>
             {/* Head (Sphere) */}
             <mesh position={[0, 0, 0]}>
                 <sphereGeometry args={[1, 32, 32]} />
