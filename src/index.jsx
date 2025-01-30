@@ -1,7 +1,8 @@
 import './style.css'
 import ReactDOM from 'react-dom/client'
 import { Canvas } from '@react-three/fiber'
-import SnailHead from './Experience'
+import Snail from './Snail'
+import Banana from './Banana'
 const root = ReactDOM.createRoot(document.querySelector('#root'))
 
 root.render(
@@ -19,23 +20,7 @@ root.render(
             <planeGeometry args={[1000, 1000]} /> {/* Width and height of the plane */}
             <meshStandardMaterial color="lightgreen" /> {/* Color of the plane */}
         </mesh>
-        <SnailHead />
-        {/* Sphere */}
-        <mesh castShadow position={[-2, 0, 0]}>
-            <sphereGeometry args={[0.7, 32, 32]} />
-            <meshStandardMaterial color="white" />
-        </mesh>
-
-        {/* Cube */}
-        <mesh castShadow position={[0, 0, 0]}>
-            <boxGeometry args={[1, 1, 1]} />
-            <meshStandardMaterial color="lightblue" />
-        </mesh>
-
-        {/* Torus */}
-        <mesh castShadow position={[2, 0.3, 0]}>
-            <torusGeometry args={[0.5, 0.2, 16, 100]} />
-            <meshStandardMaterial color="yellow" />
-        </mesh>
+        <Snail />
+        <Banana position ={[0, 0, 0]}></Banana>
     </Canvas>
 )
