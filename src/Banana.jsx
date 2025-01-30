@@ -1,6 +1,4 @@
-import { Gltf, useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { Gltf } from "@react-three/drei";
 
 export default function Banana(props) {
     return (
