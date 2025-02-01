@@ -1,4 +1,5 @@
 import { useFrame, useThree } from "@react-three/fiber";
+import { RigidBody } from "@react-three/rapier";
 import { useState, useEffect, useRef } from "react";
 
 const Directions = {
@@ -90,73 +91,43 @@ const Snail = () => {
         };
     }, [position, rotation]); // Depend on position and rotation to trigger re-render when they change
 
-
-    /*
-        // Effect to handle key press events for movement
-        useEffect(() => {
-            const handleKeyDown = (event) => {
-                const moveAmount = 0.1; // How much the snail moves on each key press
-                let newPosition = [...position];
-                let newRotation = [...rotation]; // Copy current rotation
-    
-                if (event.key === "ArrowUp" || event.key === "w") {
-                    newPosition[2] -= moveAmount; // Move up (Z axis)
-                } else if (event.key === "ArrowDown" || event.key === "s") {
-                    newPosition[2] += moveAmount; // Move down (Z axis)
-                } else if (event.key === "ArrowLeft" || event.key === "a") {
-                    newRotation[1] += Math.PI / 2; // Turn left (counterclockwise) around Y-axis
-                } else if (event.key === "ArrowRight" || event.key === "d") {
-                    newRotation[1] += Math.PI / 2; // Turn left (counterclockwise) around Y-axis
-                }
-    
-                setPosition(newPosition); // Update position state
-                setRotation(newRotation); // Update rotation state
-            };
-    
-            // Add event listener for keydown
-            window.addEventListener("keydown", handleKeyDown);
-    
-            // Cleanup the event listener on unmount
-            return () => {
-                window.removeEventListener("keydown", handleKeyDown);
-            };
-        }, [position]); // Depend on position to trigger re-render when position changes
-    */
     return (
-        <group position={position} ref={snailRef} rotation={rotation} scale={0.5}>
-            {/* Head (Sphere) */}
-            <mesh position={[0, 0, 0]}>
-                <sphereGeometry args={[1, 32, 32]} />
-                <meshStandardMaterial color="pink" />
-            </mesh>
+        <RigidBody colliders="hull" type="fixed" >
+            <group position={position} ref={snailRef} rotation={rotation} scale={0.5}>
+                {/* Head (Sphere) */}
+                <mesh position={[0, 0, 0]}>
+                    <sphereGeometry args={[1, 32, 32]} />
+                    <meshStandardMaterial color="pink" />
+                </mesh>
 
-            {/* Left EyeStalks (Cylinder) */}
-            <mesh position={[-0.5, 1.2, 0]}>
-                <cylinderGeometry args={[0.1, 0.1, 1.5, 32]} />
-                <meshStandardMaterial color="pink" />
-            </mesh>
-            {/* Left EyeStalks (Small Sphere) */}
-            <mesh position={[-0.5, 2, 0]}>
-                <sphereGeometry args={[0.2, 16, 16]} />
-                <meshStandardMaterial color="hotpink" />
-            </mesh>
+                {/* Left EyeStalks (Cylinder) */}
+                <mesh position={[-0.5, 1.2, 0]}>
+                    <cylinderGeometry args={[0.1, 0.1, 1.5, 32]} />
+                    <meshStandardMaterial color="pink" />
+                </mesh>
+                {/* Left EyeStalks (Small Sphere) */}
+                <mesh position={[-0.5, 2, 0]}>
+                    <sphereGeometry args={[0.2, 16, 16]} />
+                    <meshStandardMaterial color="hotpink" />
+                </mesh>
 
-            {/* Right EyeStalks (Cylinder) */}
-            <mesh position={[0.5, 1.2, 0]}>
-                <cylinderGeometry args={[0.1, 0.1, 1.5, 32]} />
-                <meshStandardMaterial color="pink" />
-            </mesh>
-            {/* Right EyeStalks (Small Sphere) */}
-            <mesh position={[0.5, 2, 0]}>
-                <sphereGeometry args={[0.2, 16, 16]} />
-                <meshStandardMaterial color="hotpink" />
-            </mesh>
-            {/* Shell (Sphere) */}
-            <mesh position={[0, -1, 1]} scale={[1, 2, 2]}>
-                <sphereGeometry args={[1, 32, 32]} />
-                <meshStandardMaterial color="hotpink" />
-            </mesh>
-        </group>
+                {/* Right EyeStalks (Cylinder) */}
+                <mesh position={[0.5, 1.2, 0]}>
+                    <cylinderGeometry args={[0.1, 0.1, 1.5, 32]} />
+                    <meshStandardMaterial color="pink" />
+                </mesh>
+                {/* Right EyeStalks (Small Sphere) */}
+                <mesh position={[0.5, 2, 0]}>
+                    <sphereGeometry args={[0.2, 16, 16]} />
+                    <meshStandardMaterial color="hotpink" />
+                </mesh>
+                {/* Shell (Sphere) */}
+                <mesh position={[0, -1, 1]} scale={[1, 2, 2]}>
+                    <sphereGeometry args={[1, 32, 32]} />
+                    <meshStandardMaterial color="hotpink" />
+                </mesh>
+            </group>
+        </RigidBody>
     );
 };
 
